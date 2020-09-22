@@ -1,0 +1,9 @@
+@base_url = http://localhost:8080/api
+
+###
+GET {{base_url}}/posts
+
+
+###
+GET {{base_url}}/posts/2
+
