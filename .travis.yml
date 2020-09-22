@@ -6,27 +6,18 @@ services:
   - postgresql
 env:
   global:
-    # - PGPORT=5433
-    # - PGPORT=5432
-    # - DB_NAME=testdbname
-    - DB_NAME=posters
-    # - DB_USER=dbowner
+    - DB_NAME=poster
     - DB_USER=adam
-    # - DB_PASSWORD=dbpasswordb
-    # - DB_PASSWORD=654321
 install:
-  # install all of the dependencies you need here
   - yarn
 cache:
   directories:
     - node_modules
 before_script:
-  # execute all of the commands which need to be executed before running actual tests
   - psql --command="CREATE USER ${DB_USER};"
   - psql --command="CREATE DATABASE ${DB_NAME} WITH OWNER = ${DB_USER};"
   - psql --dbname=$DB_NAME --file=postgres/queries.sql
 script:
-  # execute all of the commands which should make the build pass or fail
   - nohup yarn start &
   - sleep 3
   - yarn test
