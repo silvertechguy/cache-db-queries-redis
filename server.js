@@ -11,8 +11,6 @@ app.use(responseTime());
 
 app.use("/api/posts", require("./routes/post"));
 
-console.log(process.env.NODE_ENV);
-
 const PORT = process.env.PORT || 8000;
 app.listen(PORT, () =>
   console.log(

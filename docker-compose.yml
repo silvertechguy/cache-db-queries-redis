@@ -5,7 +5,7 @@ services:
     build: ./
     working_dir: /user/src/poster-api
     volumes:
-      - ./:./
+      - ./:/user/src/poster-api
     command: npm run dev
     ports:
       - "${PORT}:${PORT}"
