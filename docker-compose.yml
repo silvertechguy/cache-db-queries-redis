@@ -1,5 +1,21 @@
 version: "3.8"
 services:
+  redis:
+    container_name: redis
+    image: redis:alpine
+    ports:
+      - "6379:6379"
+  postgres:
+    container_name: postgres
+    build: ./postgres
+    env_file:
+      - .env
+    environment:
+      POSTGRES_USER: ${DATABASE_USER}
+      POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
+      POSTGRES_DB: ${DATABASE_NAME}
+    ports:
+      - "${DATABASE_PORT}:${DATABASE_PORT}"
   poster-api:
     container_name: backend
     build: .
@@ -12,21 +28,3 @@ services:
     depends_on:
       - redis
       - postgres
-
-  redis:
-    container_name: redis
-    image: redis:alpine
-    ports:
-      - "6379:6379"
-
-  postgres:
-    container_name: postgres
-    build: ./postgres
-    env_file:
-      - .env
-    environment:
-      POSTGRES_USER: ${DATABASE_USER}
-      POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
-      POSTGRES_DB: ${DATABASE_NAME}
-    ports:
-      - "${DATABASE_PORT}:${DATABASE_PORT}"
