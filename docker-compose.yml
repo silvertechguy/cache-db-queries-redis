@@ -2,11 +2,11 @@ version: "3.8"
 services:
   poster-api:
     container_name: backend
-    build: ./
-    working_dir: /user/src/poster-api
-    volumes:
-      - ./:/user/src/poster-api
-    command: npm run dev
+    build: .
+    env_file:
+      - .env
+    command: npm start
+    working_dir: /usr/src/poster-api
     ports:
       - "${PORT}:${PORT}"
     depends_on:
@@ -22,6 +22,8 @@ services:
   postgres:
     container_name: postgres
     build: ./postgres
+    env_file:
+      - .env
     environment:
       POSTGRES_USER: ${DATABASE_USER}
       POSTGRES_PASSWORD: ${DATABASE_PASSWORD}
