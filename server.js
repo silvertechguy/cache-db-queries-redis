@@ -1,4 +1,4 @@
-require("dotenv").config();
+require("dotenv-safe").config();
 const express = require("express");
 const morgan = require("morgan");
 const responseTime = require("response-time");
