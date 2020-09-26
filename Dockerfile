@@ -6,7 +6,7 @@ WORKDIR /srv/poster-api
 
 USER node
 
-COPY --chown=node:node package.json ./
+COPY --chown=node:node package*.json yarn.lock ./
 
 RUN yarn install --silent && yarn cache clean
 
